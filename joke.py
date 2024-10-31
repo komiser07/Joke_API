@@ -2,7 +2,7 @@
 import requests
 
 # берём URL по которому хотим получать запросы
-url = "https://api.chucknorris.io."
+url = "https://api.chucknorris.io/jokes/random"
 print(url)
 
 # выполняем GET-запрос к указанному URL и сохраняем ответ в переменной result
@@ -19,5 +19,4 @@ else:
     print("Ошибка, статус код не верен!")
 
 # выводим текст ответа из переменной result в формате JSON
-print(result.json)
-4
+print(result.json())
