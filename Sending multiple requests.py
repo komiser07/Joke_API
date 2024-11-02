@@ -5,6 +5,7 @@ class TestCreateJokeCategory():
 
     def __init__(self, base_url):
         # Инициализация словаря для хранения шуток по категориям
+        self.categories = None
         self.jokes = {}
         self.base_url = base_url
 
