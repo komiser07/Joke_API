@@ -6,7 +6,7 @@ class TestCreateJokeCategory():
     def __init__(self, base_url):
         self.categories = None
         self.base_url = base_url
-
+    # вывод списка категорий
     def list_of_all_categories(self):
         url = f"{self.base_url}/categories"
         result = requests.get(url)
