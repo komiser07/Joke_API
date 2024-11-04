@@ -38,6 +38,9 @@ class test_new_location():
             for _ in range(5):
                 f.write(f"{place_id}\n")
 
+        get_url = f"{base_url}{get_resource}{key}&place_id={place_id}"
+        print(get_url)
+
 
 start = test_new_location()
 start.test_add_place()
