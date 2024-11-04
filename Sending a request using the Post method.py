@@ -1,14 +1,14 @@
 import requests
 
 
-class test_new_location():
+class TestNewLocation():
 
-    def test_add_place(self):
-        self.base_url = "https://rahulshettyacademy.com"
+    def __init__(self, base_url, key):
+        self.base_url = base_url
+        self.key = key
         self.post_resource = "/maps/api/place/add/json"
         self.get_resource = "/maps/api/place/get/json"
         self.place_id_file = "place_id.txt"
-        self.key = "?key=qaclick123"
 
     def generate_json_location(self, index):
         return {
@@ -50,11 +50,11 @@ class test_new_location():
         # Чтение place_id из файла
         with open(self.place_id_file, "r") as file:
             for line in file:
-                lace_id_from_file = line.strip()
-                print(lace_id_from_file)
+                place_id_from_file = line.strip()
+                print(place_id_from_file)
 
                 # GET-запрос для проверки существования каждого place_id
-                get_url = f"{self.base_url}{self.get_resource}{self.key}&place_id={lace_id_from_file}"
+                get_url = f"{self.base_url}{self.get_resource}{self.key}&place_id={place_id_from_file}"
                 print(get_url)
                 result_get = requests.get(get_url)
                 print(result_get.json())
@@ -64,6 +64,5 @@ class test_new_location():
                 print("Place ID существует")
 
 
-start = test_new_location()
-start.test_add_place()
+start = TestNewLocation('https://rahulshettyacademy.com', '?key=qaclick123')
 start.multiple_places_and_check_place_ids()
