@@ -1,7 +1,7 @@
 import requests
 
 
-class TestNewLocation():
+class TestNewLocation:
 
     def __init__(self, base_url, key):
         self.base_url = base_url
@@ -12,7 +12,7 @@ class TestNewLocation():
 
     @staticmethod
     def generate_json_location(index):
-        """Создаёт уникальные данные для каждого запроса, чтобы обеспечить разные place_id"""
+        """Создаём уникальные данные для каждого запроса, чтобы обеспечить разные place_id"""
         return {
             "location": {
                 "lat": -38.383494 + index * 0.01,
@@ -64,6 +64,7 @@ class TestNewLocation():
 
                 # Проверка, что GET-запрос успешен и place_id существует
                 assert result_get.status_code == 200
+                print("Статус-код POST-запроса успешен (200)")
                 print(f"Place_id {place_id_from_file} успешно проверен и найден\n")
 
 
