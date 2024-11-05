@@ -64,7 +64,7 @@ class TestNewLocation:
 
                 # Проверка, что GET-запрос успешен и place_id существует
                 assert result_get.status_code == 200
-                print("Статус-код POST-запроса успешен (200)")
+                print("Статус-код GET-запроса успешен (200)")
                 print(f"Place_id {place_id_from_file} успешно проверен и найден\n")
 
 
