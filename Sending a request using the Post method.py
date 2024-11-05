@@ -10,7 +10,9 @@ class TestNewLocation():
         self.get_resource = "/maps/api/place/get/json"
         self.place_id_file = "place_id.txt"
 
-    def generate_json_location(self, index):
+    @staticmethod
+    def generate_json_location(index):
+        """Создаёт уникальные данные для каждого запроса, чтобы обеспечить разные place_id"""
         return {
             "location": {
                 "lat": -38.383494 + index * 0.01,
@@ -29,6 +31,7 @@ class TestNewLocation():
         }
 
     def multiple_places_and_check_place_ids(self):
+        print("== Добавляем 5 уникальных мест и записываем их place_id в файл ==")
         with open(self.place_id_file, "w") as file:
             for i in range(5):
                 post_url = f"{self.base_url}{self.post_resource}{self.key}"
@@ -48,6 +51,7 @@ class TestNewLocation():
                 file.write(f"{place_id}\n")
 
         # Чтение place_id из файла
+        print("\n== Проверка существования каждого place_id из файла ==")
         with open(self.place_id_file, "r") as file:
             for line in file:
                 place_id_from_file = line.strip()
@@ -55,13 +59,12 @@ class TestNewLocation():
 
                 # GET-запрос для проверки существования каждого place_id
                 get_url = f"{self.base_url}{self.get_resource}{self.key}&place_id={place_id_from_file}"
-                print(get_url)
                 result_get = requests.get(get_url)
                 print(result_get.json())
 
                 # Проверка, что GET-запрос успешен и place_id существует
                 assert result_get.status_code == 200
-                print("Place ID существует")
+                print(f"Place_id {place_id_from_file} успешно проверен и найден\n")
 
 
 start = TestNewLocation('https://rahulshettyacademy.com', '?key=qaclick123')
