@@ -44,6 +44,7 @@ class TestNewLocation:
 
                 # POST-запрос для добавления нового места
                 result_post = requests.post(post_url, json=json_location)
+                print(result_post.json())
 
                 check_response_post = result_post.json()
                 place_id = check_response_post.get("place_id", [])
@@ -56,7 +57,6 @@ class TestNewLocation:
         with open(self.place_id_file, "r") as file:
             for line in file:
                 place_id_from_file = line.strip()
-                print(place_id_from_file)
 
                 # GET-запрос для проверки существования каждого place_id
                 get_url = f"{self.base_url}{self.get_resource}{self.key}&place_id={place_id_from_file}"
@@ -66,11 +66,11 @@ class TestNewLocation:
                 # Проверка, что GET-запрос успешен и place_id существует
                 assert result_get.status_code == 200
                 print("Статус-код GET-запроса успешен (200)")
-                print(f"Place_id {place_id_from_file} успешно проверен и найден")
+                print(f"Place_id {place_id_from_file} успешно проверен и найден\n")
 
     # Удаляем 2-й и 4-й place_id
     def delete_places(self):
-        print("\n== Удаляем 2 и 4 места ==")
+        print("== Удаляем 2 и 4 места ==")
         indexes_to_delete = [1, 3]
 
         with open(self.place_id_file, "r") as file:
@@ -103,12 +103,12 @@ class TestNewLocation:
 
             if result_get.status_code == 200:
                 existing_locations.append(place_id)
-                print(f"Place_id {place_id} найден, {result_get.status_code}")
+                print(f"Place_id {place_id} найден, {result_get.status_code}\n")
             else:
-                print(f"Place_id {place_id} не найден: {result_get.status_code}")
+                print(f"Place_id {place_id} не найден: {result_get.status_code}\n")
 
         # Запись всех существующих place_id в новый файл
-        print("\n== Запись всех существующих place_id в файл ==")
+        print("== Запись всех существующих place_id в файл ==")
         with open(self.output_file, "w") as file:
             for place_id in existing_locations:
                 file.write(f"{place_id}\n")
