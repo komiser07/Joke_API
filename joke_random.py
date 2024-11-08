@@ -31,6 +31,6 @@ class TesCreatJoke:
 
 
 start = TesCreatJoke()
-start.test_create_random_joke('sport')
+start.test_create_random_joke('music')
     # "animal", "career", "celebrity", "dev", "explicit", "fashion", "food", "history"
     # "money", "movie", "music", "political", "religion", "science", "sport", "travel"
