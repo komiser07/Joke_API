@@ -12,9 +12,9 @@ class TestNewLocation:
         self.place_id_file = "place_id.txt"
         self.output_file = "output.txt"
 
+    # Создаём уникальные данные для каждого запроса, чтобы обеспечить разные place_id
     @staticmethod
     def generate_json_location(index):
-        """Создаём уникальные данные для каждого запроса, чтобы обеспечить разные place_id"""
         return {
             "location": {
                 "lat": -38.383494 + index * 0.01,
@@ -44,7 +44,6 @@ class TestNewLocation:
 
                 # POST-запрос для добавления нового места
                 result_post = requests.post(post_url, json=json_location)
-                print(result_post.json())
 
                 check_response_post = result_post.json()
                 place_id = check_response_post.get("place_id", [])
@@ -63,7 +62,6 @@ class TestNewLocation:
                 get_url = f"{self.base_url}{self.get_resource}{self.key}&place_id={place_id_from_file}"
                 print(get_url)
                 result_get = requests.get(get_url)
-                print(result_get.json())
 
                 # Проверка, что GET-запрос успешен и place_id существует
                 assert result_get.status_code == 200
@@ -102,7 +100,6 @@ class TestNewLocation:
             get_url = f"{self.base_url}{self.get_resource}{self.key}&place_id={place_id}"
             print(get_url)
             result_get = requests.get(get_url)
-            print(result_get.json())
 
             if result_get.status_code == 200:
                 existing_locations.append(place_id)
